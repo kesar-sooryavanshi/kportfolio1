@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kesar | GOD MODE Portfolio</title>
+
+<style>
+
+/* BASIC */
+
+body{
+margin:0;
+font-family:Segoe UI, sans-serif;
+background:#000;
+color:white;
+overflow-x:hidden;
+text-align:center;
+}
+
+/* 🔥 ANIMATED GOD BACKGROUND */
+
+body::before{
+content:"";
+position:fixed;
+width:200%;
+height:200%;
+background:linear-gradient(45deg,#00f0ff,#ff00f7,#00ff88,#00f0ff);
+animation:bgMove 18s linear infinite;
+z-index:-2;
+filter:blur(120px);
+}
+
+@keyframes bgMove{
+0%{transform:translate(0,0)}
+50%{transform:translate(-25%,-25%)}
+100%{transform:translate(0,0)}
+}
+
+/* 🖱 CURSOR GLOW */
+
+.cursor{
+width:300px;
+height:300px;
+background:radial-gradient(circle,rgba(0,255,255,0.35),transparent);
+position:fixed;
+pointer-events:none;
+transform:translate(-50%,-50%);
+z-index:-1;
+}
+
+/* HERO SECTION */
+
+.hero{
+min-height:100vh;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+}
+
+/* 😎 PROFILE IMAGE */
+
+.profile{
+width:180px;
+border-radius:50%;
+border:3px solid transparent;
+background:linear-gradient(#000,#000) padding-box,
+linear-gradient(45deg,cyan,magenta) border-box;
+animation:float 4s ease-in-out infinite;
+}
+
+@keyframes float{
+0%,100%{transform:translateY(0)}
+50%{transform:translateY(-20px)}
+}
+
+/* ✨ NAME */
+
+h1{
+font-size:42px;
+margin:15px 0 5px;
+background:linear-gradient(to right,cyan,magenta);
+-webkit-background-clip:text;
+color:transparent;
+}
+
+/* 🔥 TEXT REVEAL */
+
+.reveal{
+opacity:0;
+transform:translateY(60px);
+transition:1s;
+}
+
+.reveal.active{
+opacity:1;
+transform:translateY(0);
+}
+
+/* 🚀 GLASS LINKS */
+
+.links a{
+display:inline-block;
+margin:12px;
+padding:12px 28px;
+border-radius:30px;
+color:white;
+text-decoration:none;
+background:rgba(255,255,255,0.08);
+backdrop-filter:blur(10px);
+transition:.35s;
+}
+
+.links a:hover{
+transform:scale(1.2);
+box-shadow:0 0 25px cyan;
+}
+
+/* 📜 CUSTOM SCROLLBAR */
+
+::-webkit-scrollbar{
+width:8px;
+}
+::-webkit-scrollbar-thumb{
+background:cyan;
+border-radius:10px;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="cursor"></div>
+
+<section class="hero">
+
+<!-- 🖼 YOUR PHOTO -->
+<img src="your-photo.jpg" class="profile">
+
+<h1 class="reveal">KESAR SOORYAVANSHI</h1>
+
+<p class="reveal">BTech Developer | Future Super App Creator</p>
+
+<!-- 🔗 YOUR LINKS -->
+<div class="links reveal">
+
+<a href="#">Instagram</a>
+<a href="#">LinkedIn</a>
+<a href="#">GitHub</a>
+<a href="#">Portfolio</a>
+
+</div>
+
+</section>
+
+<script>
+
+/* 🖱 CURSOR LIGHT */
+
+document.addEventListener("mousemove",e=>{
+document.querySelector(".cursor").style.left=e.clientX+"px"
+document.querySelector(".cursor").style.top=e.clientY+"px"
+})
+
+/* 🔥 SCROLL REVEAL */
+
+window.addEventListener("scroll",()=>{
+document.querySelectorAll(".reveal").forEach(el=>{
+let top=el.getBoundingClientRect().top
+if(top<window.innerHeight-100){
+el.classList.add("active")
+}
+})
+})
+
+</script>
+
+</body>
+</html>
