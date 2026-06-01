@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kesar | GOD MODE</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+
+body{
+margin:0;
+font-family:Orbitron;
+background:black;
+color:white;
+overflow-x:hidden;
+}
+
+/* 🌌 SPACE BACKGROUND */
+
+canvas{
+position:fixed;
+top:0;
+left:0;
+z-index:-2;
+}
+
+/* 🧠 HOLOGRAM PHOTO */
+
+.profile{
+width:200px;
+border-radius:50%;
+position:relative;
+animation:float 4s ease-in-out infinite;
+box-shadow:0 0 30px cyan;
+}
+
+.profile::after{
+content:"";
+position:absolute;
+width:100%;
+height:100%;
+background:linear-gradient(transparent,cyan,transparent);
+animation:scan 3s linear infinite;
+}
+
+@keyframes scan{
+0%{top:-100%}
+100%{top:100%}
+}
+
+@keyframes float{
+50%{transform:translateY(-20px)}
+}
+
+/* ✨ NAME PARTICLE ENTRY */
+
+.name span{
+opacity:0;
+display:inline-block;
+transform:translateY(80px);
+animation:assemble 0.6s forwards;
+}
+
+@keyframes assemble{
+to{opacity:1;transform:translateY(0)}
+}
+
+/* 🤖 AI THINKING DOTS */
+
+.thinking::after{
+content:"";
+animation:dots 1.5s infinite;
+}
+
+@keyframes dots{
+0%{content:"."}
+33%{content:".."}
+66%{content:"..."}
+}
+
+/* 🧬 GLASS PANEL */
+
+.glass{
+background:rgba(255,255,255,0.05);
+backdrop-filter:blur(12px);
+padding:30px;
+border-radius:20px;
+margin:40px auto;
+width:80%;
+}
+
+/* 🤖 HUD SKILLS */
+
+.skill{
+margin:20px 0;
+}
+
+.bar{
+height:10px;
+background:#111;
+border-radius:20px;
+overflow:hidden;
+}
+
+.bar span{
+display:block;
+height:100%;
+background:linear-gradient(90deg,cyan,magenta);
+animation:load 2s forwards;
+}
+
+@keyframes load{
+from{width:0}
+}
+
+/* 🔗 LINKS */
+
+.links a{
+display:inline-block;
+margin:10px;
+padding:12px 25px;
+border-radius:30px;
+color:white;
+text-decoration:none;
+background:rgba(255,255,255,0.08);
+transition:.3s;
+}
+
+.links a:hover{
+box-shadow:0 0 20px cyan;
+transform:scale(1.1);
+}
+
+</style>
+</head>
+
+<body>
+
+<canvas id="stars"></canvas>
+
+<center>
+
+<br><br>
+
+<img src="kesar01.jpeg" class="profile">
+
+<h1 class="name" id="name"></h1>
+
+<p class="thinking">AI Portfolio Loading</p>
+
+<div class="glass">
+
+<h2>⚡ SKILLS HUD</h2>
+
+<div class="skill">Python<div class="bar"><span style="width:75%"></span></div></div>
+<div class="skill">C++<div class="bar"><span style="width:60%"></span></div></div>
+<div class="skill">HTML<div class="bar"><span style="width:90%"></span></div></div>
+<div class="skill">Prompt Engineering<div class="bar"><span style="width:85%"></span></div></div>
+
+</div>
+
+<div class="glass links">
+
+<h2>🌐 CONNECT</h2>
+
+<a href="https://www.instagram.com/sooryavanshii_kesar" target="_blank">Instagram</a>
+<a href="https://www.linkedin.com/in/kesar-sooryavanshi-480b39362" target="_blank">LinkedIn</a>
+<a href="https://github.com/kesar-sooryavanshi" target="_blank">GitHub</a>
+<a href="https://x.com/kesar319889" target="_blank">Twitter</a>
+<a href="https://www.commudle.com/users/9915487ff989ff52d72c0128b73c5b5c" target="_blank">Commudle</a>
+
+</div>
+
+</center>
+
+<script>
+
+/* 🌌 STARFIELD */
+
+const canvas = document.getElementById("stars");
+const ctx = canvas.getContext("2d");
+
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+let stars = [];
+
+for(let i=0;i<200;i++){
+stars.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,r:Math.random()*2})
+}
+
+function draw(){
+ctx.clearRect(0,0,canvas.width,canvas.height);
+ctx.fillStyle="white";
+stars.forEach(s=>{
+ctx.beginPath();
+ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
+ctx.fill();
+s.y+=0.3;
+if(s.y>canvas.height)s.y=0;
+});
+requestAnimationFrame(draw);
+}
+draw();
+
+/* ✨ NAME PARTICLES */
+
+let text="KESAR SOORYAVANSHI";
+let nameDiv=document.getElementById("name");
+
+text.split("").forEach((letter,i)=>{
+let span=document.createElement("span");
+span.innerHTML=letter;
+span.style.animationDelay=i*0.08+"s";
+nameDiv.appendChild(span);
+});
+
+</script>
+
+</body>
+</html>
