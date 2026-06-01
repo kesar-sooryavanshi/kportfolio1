@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kesar Dev Panel</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+
+<style>
+
+body{
+margin:0;
+font-family:Inter;
+background:#0d1117;
+color:white;
+display:flex;
+height:100vh;
+overflow:hidden;
+}
+
+/* SIDEBAR */
+
+.sidebar{
+width:260px;
+background:#161b22;
+padding:20px;
+text-align:center;
+}
+
+.sidebar img{
+width:120px;
+border-radius:50%;
+margin-bottom:15px;
+}
+
+.status{
+color:#2ea043;
+font-size:14px;
+}
+
+/* MAIN */
+
+.main{
+flex:1;
+display:flex;
+flex-direction:column;
+}
+
+/* TOPBAR */
+
+.topbar{
+background:#161b22;
+padding:15px;
+}
+
+/* TABS */
+
+.tabs button{
+background:none;
+border:none;
+color:white;
+margin-right:15px;
+cursor:pointer;
+font-size:15px;
+}
+
+/* CONTENT */
+
+.content{
+padding:30px;
+overflow-y:auto;
+}
+
+/* SKILL CIRCLE */
+
+.circle{
+width:120px;
+height:120px;
+margin:20px;
+display:inline-block;
+}
+
+svg{
+transform:rotate(-90deg);
+}
+
+circle{
+fill:none;
+stroke-width:10;
+stroke:#30363d;
+}
+
+.progress{
+stroke:#58a6ff;
+stroke-dasharray:314;
+stroke-dashoffset:314;
+transition:1s;
+}
+
+/* LINKS */
+
+.links a{
+display:block;
+color:#58a6ff;
+margin:10px 0;
+text-decoration:none;
+}
+
+/* COMMAND */
+
+.command{
+position:fixed;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+background:#161b22;
+padding:20px;
+display:none;
+width:400px;
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- SIDEBAR -->
+
+<div class="sidebar">
+
+<img src="kesar01.jpeg">
+
+<h2>Kesar</h2>
+<p class="status">● Available for building</p>
+
+<div class="links">
+<a href="https://www.instagram.com/sooryavanshii_kesar">Instagram</a>
+<a href="https://www.linkedin.com/in/kesar-sooryavanshi-480b39362">LinkedIn</a>
+<a href="https://github.com/kesar-sooryavanshi">GitHub</a>
+<a href="https://x.com/kesar319889">Twitter</a>
+<a href="https://www.commudle.com/users/9915487ff989ff52d72c0128b73c5b5c">Commudle</a>
+</div>
+
+</div>
+
+<!-- MAIN -->
+
+<div class="main">
+
+<div class="topbar">
+<div class="tabs">
+<button onclick="show('about')">About</button>
+<button onclick="show('skills')">Skills</button>
+<button onclick="show('projects')">Projects</button>
+</div>
+</div>
+
+<div class="content" id="content">
+
+<h2>About Me</h2>
+<p>BTech student focused on building real tech products and becoming a full stack developer.</p>
+
+</div>
+
+</div>
+
+<!-- COMMAND PALETTE -->
+
+<div class="command" id="cmd">
+<h3>Command Menu</h3>
+<p>Type: about / skills / projects</p>
+<input id="input" style="width:100%;padding:10px;background:#0d1117;color:white;border:none;">
+</div>
+
+<script>
+
+function show(section){
+
+if(section==="about"){
+content.innerHTML="<h2>About Me</h2><p>BTech student passionate about development and building real world projects.</p>";
+}
+
+if(section==="skills"){
+content.innerHTML=`
+
+<div class="circle">
+<svg width="120" height="120">
+<circle cx="60" cy="60" r="50"></circle>
+<circle class="progress" cx="60" cy="60" r="50" style="stroke-dashoffset:60"></circle>
+</svg>
+<p>Python</p>
+</div>
+
+<div class="circle">
+<svg width="120" height="120">
+<circle cx="60" cy="60" r="50"></circle>
+<circle class="progress" cx="60" cy="60" r="50" style="stroke-dashoffset:90"></circle>
+</svg>
+<p>C++</p>
+</div>
+
+<div class="circle">
+<svg width="120" height="120">
+<circle cx="60" cy="60" r="50"></circle>
+<circle class="progress" cx="60" cy="60" r="50" style="stroke-dashoffset:40"></circle>
+</svg>
+<p>HTML</p>
+</div>
+
+`;
+}
+
+if(section==="projects"){
+content.innerHTML="<h2>Projects</h2><p>Your projects will appear here.</p>";
+}
+
+}
+
+/* COMMAND MENU */
+
+document.addEventListener("keydown",e=>{
+if(e.key==="k"){
+cmd.style.display="block";
+}
+});
+
+input.addEventListener("keydown",e=>{
+if(e.key==="Enter"){
+show(input.value);
+cmd.style.display="none";
+}
+});
+
+</script>
+
+</body>
+</html>0
