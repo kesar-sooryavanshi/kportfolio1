@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kesar // AI SYSTEM</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
+
+<style>
+
+body{
+margin:0;
+background:black;
+color:#00fff7;
+font-family:Orbitron;
+overflow:hidden;
+}
+
+/* BOOT SCREEN */
+
+#boot{
+position:fixed;
+width:100%;
+height:100%;
+background:black;
+display:flex;
+align-items:center;
+justify-content:center;
+flex-direction:column;
+z-index:999;
+animation:bootOff 4s forwards 3s;
+}
+
+@keyframes bootOff{
+to{opacity:0;visibility:hidden}
+}
+
+.scan{
+width:320px;
+height:2px;
+background:cyan;
+animation:scan 2s infinite;
+}
+
+@keyframes scan{
+0%{transform:translateY(-160px)}
+100%{transform:translateY(160px)}
+}
+
+/* STARFIELD */
+
+canvas{
+position:fixed;
+z-index:-1;
+}
+
+/* CORE */
+
+.core{
+position:absolute;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+text-align:center;
+}
+
+.core img{
+width:190px;
+border-radius:50%;
+box-shadow:0 0 40px cyan;
+animation:rotate 12s linear infinite;
+}
+
+@keyframes rotate{
+100%{transform:rotate(360deg)}
+}
+
+/* NAME PARTICLES */
+
+.name span{
+opacity:0;
+display:inline-block;
+transform:scale(0);
+animation:build .5s forwards;
+}
+
+@keyframes build{
+to{opacity:1;transform:scale(1)}
+}
+
+/* AI THINKING */
+
+.thinking::after{
+content:"";
+animation:dots 1.5s infinite;
+}
+
+@keyframes dots{
+0%{content:"."}
+33%{content:".."}
+66%{content:"..."}
+}
+
+/* REACTOR SKILLS */
+
+.reactor{
+position:absolute;
+bottom:40px;
+width:100%;
+display:flex;
+justify-content:center;
+gap:25px;
+flex-wrap:wrap;
+}
+
+.node{
+width:100px;
+height:100px;
+border:2px solid cyan;
+border-radius:50%;
+display:flex;
+align-items:center;
+justify-content:center;
+animation:pulse 2s infinite;
+}
+
+@keyframes pulse{
+50%{box-shadow:0 0 25px cyan}
+}
+
+/* LINKS */
+
+.links{
+position:absolute;
+top:20px;
+right:20px;
+display:flex;
+flex-direction:column;
+gap:10px;
+}
+
+.links a{
+color:cyan;
+text-decoration:none;
+border:1px solid cyan;
+padding:10px 20px;
+transition:.3s;
+}
+
+.links a:hover{
+background:cyan;
+color:black;
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- BOOT -->
+<div id="boot">
+<h2>INITIALIZING KESAR AI SYSTEM...</h2>
+<div class="scan"></div>
+</div>
+
+<canvas id="stars"></canvas>
+
+<!-- CENTER CORE -->
+<div class="core">
+
+<img src="kesar01.jpeg" alt="kesar">
+
+<h1 class="name" id="name"></h1>
+
+<p class="thinking">AI Consciousness Loading</p>
+
+</div>
+
+<!-- SKILLS REACTOR -->
+<div class="reactor">
+
+<div class="node">PYTHON</div>
+<div class="node">C++</div>
+<div class="node">HTML</div>
+<div class="node">PROMPT</div>
+
+</div>
+
+<!-- SOCIAL LINKS -->
+<div class="links">
+
+<a href="https://www.instagram.com/sooryavanshii_kesar" target="_blank">Instagram</a>
+
+<a href="https://www.linkedin.com/in/kesar-sooryavanshi-480b39362" target="_blank">LinkedIn</a>
+
+<a href="https://github.com/kesar-sooryavanshi" target="_blank">GitHub</a>
+
+<a href="https://x.com/kesar319889" target="_blank">Twitter</a>
+
+<a href="https://www.commudle.com/users/9915487ff989ff52d72c0128b73c5b5c" target="_blank">Commudle</a>
+
+</div>
+
+<script>
+
+/* STARFIELD */
+
+const c=document.getElementById("stars");
+const ctx=c.getContext("2d");
+
+c.width=innerWidth;
+c.height=innerHeight;
+
+let stars=[];
+
+for(let i=0;i<160;i++){
+stars.push({x:Math.random()*c.width,y:Math.random()*c.height});
+}
+
+function draw(){
+ctx.clearRect(0,0,c.width,c.height);
+ctx.fillStyle="white";
+
+stars.forEach(s=>{
+ctx.fillRect(s.x,s.y,2,2);
+s.y+=0.4;
+if(s.y>c.height)s.y=0;
+});
+
+requestAnimationFrame(draw);
+}
+
+draw();
+
+/* NAME BUILD */
+
+let text="KESAR SOORYAVANSHI";
+let name=document.getElementById("name");
+
+text.split("").forEach((l,i)=>{
+let span=document.createElement("span");
+span.innerHTML=l;
+span.style.animationDelay=i*0.1+"s";
+name.appendChild(span);
+});
+
+</script>
+
+</body>
+</html>
