@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kesar Portfolio</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Segoe UI,sans-serif;
+scroll-behavior:smooth;
+}
+
+body{
+background:#000;
+color:#fff;
+overflow-x:hidden;
+}
+
+/* 🌌 BACKGROUND GLOW */
+body::before{
+content:"";
+position:fixed;
+width:100%;
+height:100%;
+background:radial-gradient(circle at 20% 20%,rgba(0,255,255,0.15),transparent),
+radial-gradient(circle at 80% 80%,rgba(255,0,255,0.15),transparent);
+z-index:-3;
+}
+
+/* 🌧️ RAIN CANVAS */
+canvas{
+position:fixed;
+top:0;
+left:0;
+z-index:-2;
+}
+
+/* NAVBAR */
+nav{
+display:flex;
+justify-content:space-between;
+padding:20px 60px;
+background:rgba(0,0,0,0.5);
+backdrop-filter:blur(12px);
+position:sticky;
+top:0;
+z-index:10;
+}
+
+/* HERO */
+.hero{
+display:flex;
+align-items:center;
+justify-content:space-between;
+padding:100px 60px;
+min-height:100vh;
+}
+
+.hero-text h1{
+font-size:55px;
+background:linear-gradient(to right,cyan,magenta);
+-webkit-background-clip:text;
+color:transparent;
+}
+
+.hero img{
+width:280px;
+height:280px;
+border-radius:50%;
+border:4px solid cyan;
+box-shadow:0 0 30px cyan;
+animation:float 4s ease-in-out infinite;
+}
+
+@keyframes float{
+50%{transform:translateY(-20px)}
+}
+
+/* GLASS SECTION */
+section{
+padding:70px 60px;
+margin:40px;
+background:rgba(255,255,255,0.05);
+border-radius:20px;
+backdrop-filter:blur(15px);
+box-shadow:0 0 25px rgba(0,255,255,0.15);
+opacity:0;
+transform:translateY(60px);
+transition:1s;
+}
+
+section.show{
+opacity:1;
+transform:translateY(0);
+}
+
+h2{
+text-align:center;
+margin-bottom:20px;
+}
+
+/* BOXES */
+.box-container{
+display:flex;
+justify-content:center;
+gap:25px;
+flex-wrap:wrap;
+}
+
+.box{
+padding:25px 40px;
+border-radius:12px;
+font-weight:bold;
+transition:0.4s;
+}
+
+.box:hover{
+transform:scale(1.1);
+box-shadow:0 0 20px cyan;
+}
+
+/* ORIGINAL COLORS SAFE */
+.maroon{background:#800000;}
+.black{background:#2f3640;}
+.purple{background:linear-gradient(45deg,#667eea,#764ba2);}
+.python{background:#f39c12;}
+.cpp{background:#2980b9;}
+.html{background:#e44d26;}
+.prompt{background:#16a085;}
+
+/* LINKS */
+.links a{
+display:block;
+width:220px;
+margin:12px auto;
+padding:12px;
+background:#2f3640;
+color:white;
+text-decoration:none;
+border-radius:8px;
+transition:0.4s;
+}
+
+.links a:hover{
+background:linear-gradient(45deg,cyan,magenta);
+transform:scale(1.08);
+}
+
+/* CURSOR GLOW */
+.cursor{
+position:fixed;
+width:15px;
+height:15px;
+border-radius:50%;
+background:cyan;
+pointer-events:none;
+mix-blend-mode:screen;
+z-index:999;
+}
+
+</style>
+</head>
+
+<body>
+
+<canvas id="rain"></canvas>
+<div class="cursor"></div>
+
+<!-- NAVBAR -->
+<nav>
+<h2>Kesar</h2>
+<ul>
+<li>About</li>
+<li>Skills</li>
+<li>Contact</li>
+</ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+
+<div class="hero-text">
+<h1>Hello, I'm <br>Kesar Sooryavanshi</h1>
+<p>BTech Student • Tech Enthusiast • Creator</p>
+</div>
+
+<img src="kesar01.jpeg">
+
+</div>
+
+<!-- ABOUT -->
+<section>
+<h2>About Me</h2>
+<p>
+Hi! I’m Kesar Sooryavanshi, a BTech student passionate about technology, coding,
+and creating projects that make a difference.
+</p>
+</section>
+
+<!-- SKILLS -->
+<section>
+<h2>My Skills</h2>
+<div class="box-container">
+<div class="box maroon">Problem Solving</div>
+<div class="box purple">Leadership</div>
+<div class="box black">Time Management</div>
+<div class="box maroon">Communication</div>
+<div class="box purple">Teamwork</div>
+<div class="box black">Analytical Thinking</div>
+</div>
+</section>
+
+<!-- PROGRAMMING -->
+<section>
+<h2>Programming Languages</h2>
+<div class="box-container">
+<div class="box python">Basic Python</div>
+<div class="box cpp">Basic C++</div>
+<div class="box html">HTML</div>
+<div class="box prompt">Good in Prompting</div>
+</div>
+</section>
+
+<!-- LINKS -->
+<section class="links">
+<h2>Connect With Me</h2>
+
+<a href="https://www.instagram.com/sooryavanshii_kesar" target="_blank">Instagram</a>
+<a href="https://www.linkedin.com/in/kesar-sooryavanshi-480b39362" target="_blank">LinkedIn</a>
+<a href="https://github.com/kesar-sooryavanshi" target="_blank">GitHub</a>
+<a href="https://x.com/kesar319889" target="_blank">Twitter (X)</a>
+<a href="https://www.commudle.com/users/9915487ff989ff52d72c0128b73c5b5c" target="_blank">Commudle</a>
+
+</section>
+
+<script>
+
+/* 🌧️ RAIN */
+const canvas=document.getElementById("rain");
+const ctx=canvas.getContext("2d");
+canvas.width=innerWidth;
+canvas.height=innerHeight;
+
+let rain=[];
+for(let i=0;i<160;i++){
+rain.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,l:Math.random()*20,s:Math.random()*5+5});
+}
+
+function drawRain(){
+ctx.clearRect(0,0,canvas.width,canvas.height);
+ctx.strokeStyle="cyan";
+ctx.lineWidth=1;
+ctx.beginPath();
+rain.forEach(r=>{
+ctx.moveTo(r.x,r.y);
+ctx.lineTo(r.x,r.y+r.l);
+});
+ctx.stroke();
+
+rain.forEach(r=>{
+r.y+=r.s;
+if(r.y>canvas.height) r.y=0;
+});
+
+requestAnimationFrame(drawRain);
+}
+drawRain();
+
+/* ✨ SCROLL REVEAL */
+const sections=document.querySelectorAll("section");
+window.addEventListener("scroll",()=>{
+sections.forEach(sec=>{
+if(sec.getBoundingClientRect().top<window.innerHeight-100){
+sec.classList.add("show");
+}
+});
+});
+
+/* 🖱️ CURSOR */
+const cursor=document.querySelector(".cursor");
+document.addEventListener("mousemove",e=>{
+cursor.style.top=e.clientY+"px";
+cursor.style.left=e.clientX+"px";
+});
+
+</script>
+
+</body>
+</html>
