@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Kesar Living Portfolio</title>
+
+<style>
+
+body{
+margin:0;
+overflow:hidden;
+background:linear-gradient(#87ceeb,#e0f7ff);
+font-family:sans-serif;
+transition:1s;
+}
+
+canvas{
+display:block;
+}
+
+#name{
+position:absolute;
+top:15px;
+width:100%;
+text-align:center;
+font-size:30px;
+font-weight:bold;
+color:#2d3436;
+}
+
+</style>
+</head>
+
+<body>
+
+<div id="name">Kesar Sooryavanshi</div>
+
+<canvas id="world"></canvas>
+
+<script>
+
+const canvas=document.getElementById("world");
+const ctx=canvas.getContext("2d");
+
+canvas.width=innerWidth;
+canvas.height=innerHeight;
+
+let growth=0;
+let idleTime=0;
+
+/* 🌳 TREE FUNCTION */
+
+function tree(x,y,len,angle,depth){
+
+if(depth===0) return;
+
+let x2=x+len*Math.cos(angle);
+let y2=y+len*Math.sin(angle);
+
+ctx.beginPath();
+ctx.moveTo(x,y);
+ctx.lineTo(x2,y2);
+ctx.strokeStyle="#5c3b1e";
+ctx.lineWidth=depth;
+ctx.stroke();
+
+/* SKILLS LABEL */
+
+if(depth===3){
+ctx.fillStyle="black";
+ctx.font="14px sans-serif";
+
+let skills=["Python","C++","HTML","Prompt"];
+ctx.fillText(skills[Math.floor(Math.random()*skills.length)],x2,y2);
+}
+
+/* 🍎 FRUITS */
+
+if(depth===2){
+ctx.beginPath();
+ctx.arc(x2,y2,8,0,Math.PI*2);
+ctx.fillStyle="red";
+ctx.fill();
+fruits.push({x:x2,y:y2});
+}
+
+tree(x2,y2,len*0.75,angle-0.4,depth-1);
+tree(x2,y2,len*0.75,angle+0.4,depth-1);
+
+}
+
+/* 📸 PHOTO LOAD */
+
+const img=new Image();
+img.src="kesar01.jpeg";
+
+/* 🍎 FRUIT POSITIONS */
+
+let fruits=[];
+
+function draw(){
+
+ctx.clearRect(0,0,canvas.width,canvas.height);
+
+growth+=0.01;
+
+fruits=[];
+
+tree(canvas.width/2,canvas.height,growth*120,-Math.PI/2,10);
+
+/* PHOTO ON TRUNK */
+
+ctx.drawImage(img,canvas.width/2-40,canvas.height-260,80,80);
+
+requestAnimationFrame(draw);
+}
+
+draw();
+
+/* 🍎 SOCIAL LINKS */
+
+canvas.addEventListener("click",e=>{
+
+let mx=e.clientX;
+let my=e.clientY;
+
+fruits.forEach((f,i)=>{
+
+let dist=Math.hypot(mx-f.x,my-f.y);
+
+if(dist<10){
+
+let links=[
+"https://www.instagram.com/sooryavanshii_kesar",
+"https://www.linkedin.com/in/kesar-sooryavanshi-480b39362",
+"https://github.com/kesar-sooryavanshi",
+"https://x.com/kesar319889",
+"https://www.commudle.com/users/9915487ff989ff52d72c0128b73c5b5c"
+];
+
+window.open(links[i%links.length]);
+
+}
+
+});
+
+});
+
+/* 🌙 NIGHT MODE */
+
+setInterval(()=>{
+
+idleTime++;
+
+if(idleTime>6){
+document.body.style.background="linear-gradient(#0f2027,#203a43,#2c5364)";
+fireflies();
+}
+
+},1000);
+
+document.onmousemove=()=>{
+idleTime=0;
+document.body.style.background="linear-gradient(#87ceeb,#e0f7ff)";
+};
+
+/* ✨ FIREFLIES */
+
+function fireflies(){
+
+for(let i=0;i<20;i++){
+
+ctx.beginPath();
+ctx.arc(Math.random()*canvas.width,Math.random()*canvas.height,2,0,6.28);
+ctx.fillStyle="yellow";
+ctx.fill();
+
+}
+
+}
+
+</script>
+
+</body>
+</html>
